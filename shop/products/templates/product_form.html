@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %}
+
+{% block title %}{% if object %}Upravit produkt{% else %}Přidat produkt{% endif %}{% endblock %}
+
+{% block content %}
+<h1>{% if object %}Upravit produkt{% else %}Přidat produkt{% endif %}</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Uložit</button>
+</form>
+
+<a href="{% url 'product_list' %}">Zpět na seznam produktů</a>
+{% endblock %}

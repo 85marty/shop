@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Seznam objednávek{% endblock %}
+{% block content %}
+<h1>Seznam objednávek</h1>
+{% if is_admin %}
+<a href="{% url 'order_list' %}?all=true">Všechny</a> |
+<a href="{% url 'order_list' %}">Jen moje</a>
+{% endif %}
+<ul>
+    {% for order in orders %}
+    <li>
+        <a href="{% url 'order_detail' order.id %}">Objednávka #{{ order.id }} - {{ order.created_at }} ({{ order.status
+            }})</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

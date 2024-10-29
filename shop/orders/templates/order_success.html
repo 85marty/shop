@@ -1,0 +1,9 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Objednávka úspěšná{% endblock %}
+
+{% block content %}
+<h1>Objednávka byla úspěšně vytvořena!</h1>
+<p>Děkujeme za váš nákup. Potvrdili jsme vaši objednávku.</p>
+<a href="{% url 'product_list' %}">Pokračovat v nákupu</a>
+{% endblock %}

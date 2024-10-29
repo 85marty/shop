@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Přihlášení{% endblock %}
+
+{% block content %}
+<h2>Přihlášení</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" name="next" value="{{ request.GET.next }}">
+    <button type="submit">Přihlásit se</button>
+</form>
+<a href="{% url 'register' %}">Zaregistrovat se</a>
+{% endblock %}

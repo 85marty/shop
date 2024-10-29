@@ -1,0 +1,28 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+    <a href="{% url 'product_list' %}">Všechny produkty</a> |
+    {% for category in categories %}
+        <a href="{% url 'product_list_by_category' category.slug %}">{{ category.name }}</a></li>
+        {% if is_admin %}
+            <a href="{% url 'category_edit' category.pk %}">
+                <img src="{% static 'edit.png' %}" alt="Upravit" width="16" height="16" class="icon">
+            </a>
+            <a href="{% url 'category_delete' category.pk %}">
+                <img src="{% static 'delete.png' %}" alt="Smazat" width="16" height="16" class="icon">
+            </a>
+        {% endif %}
+        |
+    {% empty %}
+        {% if is_admin %}
+            <p>Žádné kategorie nebyly nalezeny.</p>
+        {% endif %}
+    {% endfor %}
+{% if is_admin %}
+<ul>
+    <li><a href="{% url 'category_create' %}">Vytvořit kategorii</a></li>
+</ul>
+{% endif %}
+
+{% endblock %}

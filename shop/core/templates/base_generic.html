@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Můj e-shop{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header>
+    <h1>Můj e-shop</h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'product_list' %}">Produkty</a></li>
+            <li><a href="{% url 'cart' %}">Košík</a></li>
+            {% if is_logged_in %}
+                <li><a href="{% url 'order_list' %}">Objednávky</a></li>
+                <li><a href="{% url 'member_detail' user.pk %}">Uživatelský profil</a></li>
+                <li><a href="{% url 'logout' %}?next={{ request.path }}">Odhlásit se</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}?next={{ request.path }}">Přihlásit se</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}">{{ message }}</div>
+{% endfor %}
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+    <p>&copy; 2024 Můj e-shop</p>
+</footer>
+</body>
+</html>

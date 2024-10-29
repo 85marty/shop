@@ -1,0 +1,20 @@
+.icon {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Přidání zboží do košíku */
+.quantity-form .form-row {
+    display: flex;
+    align-items: center; /* Vertikální zarovnání */
+}
+
+.quantity-form .form-row button {
+    margin-left: 10px; /* Mezera mezi polem a tlačítkem */
+}
+
+.quantity-form .form-row input {
+    width: 30px; /* Šířka pole pro množství */
+}

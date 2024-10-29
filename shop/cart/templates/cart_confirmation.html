@@ -1,0 +1,7 @@
+{% extends "base_generic.html" %}
+{% block content %}
+    <h2>Úspěšně přidáno do košíku!</h2>
+    <p>{{ product.name }} bylo přidáno do vašeho košíku.</p>
+    <a href="{% url 'cart' %}">Přejít do košíku</a> |
+    <a href="{% url 'product_detail' product.pk %}">Pokračovat v nákupu</a>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Přihlášení{% endblock %}
+
+{% block content %}
+<h1>Registrace</h1>
+<form method="POST" action="">
+    {% csrf_token %}
+    <div>
+        <label for="username">Uživatelské jméno:</label>
+        <input type="text" id="username" name="username" required>
+    </div>
+    <div>
+        <label for="password">Heslo:</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <button type="submit">Registrovat</button>
+</form>
+<p>Máte již účet? <a href="{% url 'login' %}">Přihlaste se zde</a>.</p>
+{% endblock %}
