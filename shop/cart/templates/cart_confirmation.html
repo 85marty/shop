@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+{% block content %}
+<h2>
+    {% if action == 'added' %}
+    Úspěšně přidáno do košíku!
+    {% elif action == 'removed' %}
+    Úspěšně odstraněno z košíku!
+    {% endif %}
+</h2>
+<p>{{ product.name }} bylo {% if action == 'added' %} přidáno {% else %} odstraněno {% endif %} z vašeho košíku.</p>
+<a href="{% url 'cart' %}">Přejít do košíku</a> |
+<a href="{% url 'product_list'%}">Pokračovat v nákupu</a>
+{% endblock %}

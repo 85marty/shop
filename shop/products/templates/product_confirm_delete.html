@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Smazání produktu{% endblock %}
+
+{% block content %}
+<h1>Ověření mazání produktu</h1>
+<p>Opravdu chcete smazat {{ object.name }}?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Ano, smazat</button>
+    <a href="{% url 'product_list' %}">Zpět</a>
+</form>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+
+{% block title %}{% if object %}Upravit uživatele{% else %}Přidat uživatele{% endif %}{% endblock %}
+
+{% block content %}
+<h1>{% if object %}Upravit uživatele{% else %}Přidat uživatele{% endif %}</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <label for="id_first_name">First name:</label>
+    <input type="text" name="first_name" id="id_first_name" value="{{ request.user.first_name }}" required>
+
+    <label for="id_last_name">Last name:</label>
+    <input type="text" name="last_name" id="id_last_name" value="{{ request.user.last_name }}" required>
+
+    <label for="id_email">Email:</label>
+    <input type="email" name="email" id="id_email" value="{{ request.user.email }}" required>
+
+    {{ form.as_p }}
+    <button type="submit">Uložit</button>
+</form>
+
+<a href="{% url 'member_detail' object.id %}">Zpět na detail uživatele</a>
+{% endblock %}

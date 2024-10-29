@@ -1,0 +1,37 @@
+{% extends "category_list.html" %}
+{% load static %}
+
+{% block title %}Seznam produktů{% endblock %}
+
+{% block content %}
+<h1>Seznam produktů</h1>
+{{ block.super }}
+{% if is_admin %}
+<ul>
+    <li><a href="{% url 'product_create' %}">Vytvořit produkt</a></li>
+</ul>
+{% endif %}
+<ul>
+    {% for product in products %}
+    <li>
+        <h2>
+            {{ product.name }}
+            {% if is_admin %}
+            <a href="{% url 'product_edit' product.pk %}">
+                <img src="{% static 'edit.png' %}" alt="Upravit" width="16" height="16" class="icon">
+            </a>
+            <a href="{% url 'product_delete' product.pk %}">
+                <img src="{% static 'delete.png' %}" alt="Smazat" width="16" height="16" class="icon">
+            </a>
+            {% endif %}
+        </h2>
+        <p>{{ product.description }}</p>
+        <p>Cena: {{ product.price }} Kč</p>
+        <a href="{% url 'product_detail' product.pk %}">Detail</a> |
+        <a href="{% url 'add_to_cart' product_id=product.pk quantity=1%}">Do košíku</a>
+    </li>
+    {% empty %}
+    <p>Žádné produkty nebyly nalezeny.</p>
+    {% endfor %}
+</ul>
+{% endblock %}

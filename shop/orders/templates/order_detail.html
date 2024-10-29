@@ -1,0 +1,31 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Detail objednávky #{{ order.id }}{% endblock %}
+
+{% block content %}
+<h1>Detail objednávky #{{ order.id }}</h1>
+<p><strong>Datum vytvoření:</strong> {{ order.created_at }}</p>
+<p><strong>Uživatel:</strong> {{ order.user.get_full_name }}</p>
+<p><strong>Status:</strong> {{ order.status }}</p>
+
+<h2>Položky v objednávce</h2>
+<ul>
+    {% for item in order.items.all %}
+    <li>{{ item.product.name }} (x{{ item.quantity }})</li>
+    {% endfor %}
+</ul>
+
+{% if is_admin %}
+<h2>Změnit stav objednávky</h2>
+<form method="post">
+    {% csrf_token %}
+    <select name="status">
+        <option value="new" {% if order.status == 'new' %}selected{% endif %}>Nová</option>
+        <option value="in_progress" {% if order.status == 'in_progress' %}selected{% endif %}>V zpracování</option>
+        <option value="completed" {% if order.status == 'completed' %}selected{% endif %}>Dokončená</option>
+        <option value="canceled" {% if order.status == 'canceled' %}selected{% endif %}>Zrušená</option>
+    </select>
+    <button type="submit">Uložit změny</button>
+</form>
+{% endif %}
+{% endblock %}

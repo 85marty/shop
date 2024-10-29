@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Seznam členů{% endblock %}
+
+{% block content %}
+<h1>Seznam členů</h1>
+
+<ul>
+    {% for member in members %}
+    <li>
+        <a href="{% url 'member_detail' member.pk %}">{{ member.username }} - {{ member.first_name }} {{ member.last_name }}</a>
+        <a href="{% url 'member_delete' member.pk %}">Smazat</a>
+    </li>
+    {% empty %}
+    <p>Žádní členové nebyli nalezeni.</p>
+    {% endfor %}
+</ul>
+{% endblock %}

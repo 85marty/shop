@@ -1,0 +1,23 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Můj košík{% endblock %}
+
+{% block content %}
+<h1>Můj košík</h1>
+
+{% if cart_items %}
+<ul>
+    {% for item in cart_items %}
+    <li>
+        {{ item.product.name }} (x{{ item.quantity }}) - {{ item.product.price }} Kč
+    </li>
+    {% endfor %}
+</ul>
+<p><strong>Celková cena: {{ total_price }} Kč</strong></p>
+{% else %}
+<p>Košík je prázdný.</p>
+{% endif %}
+
+<a href="{% url 'product_list' %}">Pokračovat v nákupu</a> |
+<a href="{% url 'create_order' %}">K objednávce</a>
+{% endblock %}

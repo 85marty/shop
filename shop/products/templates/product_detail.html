@@ -1,0 +1,34 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block title %}Detail produktu: {{ product.name }}{% endblock %}
+
+{% block content %}
+<h1>{{ product.name }}
+{% if is_admin %}
+<a href="{% url 'product_edit' product.pk %}">
+    <img src="{% static 'edit.png' %}" alt="Upravit" width="16" height="16" class="icon">
+</a>
+<a href="{% url 'product_delete' product.pk %}">
+    <img src="{% static 'delete.png' %}" alt="Smazat" width="16" height="16" class="icon">
+</a>
+{% endif %}
+</h1>
+<p><strong>Popis:</strong> {{ product.description }}</p>
+<p><strong>Cena:</strong> {{ product.price }} Kč</p>
+<p><strong>Skladem:</strong> {{ product.stock }}</p>
+{% if product.image %}
+<img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 300px;">
+{% endif %}
+<form method="post" class="quantity-form">
+    {% csrf_token %}
+    <div class="form-row">
+        {{ form.quantity.label_tag }}
+        {{ form.quantity }}
+        <button type="submit">Přidat do košíku</button>
+    </div>
+</form>
+<p>
+    <a href="{% url 'product_list' %}">Zpět na seznam produktů</a>
+</p>
+{% endblock %}

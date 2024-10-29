@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Detail člena: {{ member.first_name }}{% endblock %}
+
+{% block content %}
+<h1>Detail uživatele {{ member.user.username }}</h1>
+<p>Jméno: {{ member.user.first_name }}</p>
+<p>Příjmení {{ member.user.last_name }}</p>
+<p>Adresa: {{ member.address }}</p>
+<p>Telefon: {{ member.phone_number }}</p>
+<p>Email: {{ member.user.email }}</p>
+
+<p>
+    <a href="{% url 'member_edit' member.pk %}">Upravit</a>
+    {% if is_admin %}
+        | <a href="{% url 'member_list' %}">Seznam všech členů</a>
+    {% endif %}
+</p>
+{% endblock %}
